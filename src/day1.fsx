@@ -14,5 +14,5 @@ let Part2 (input: int seq) =
     let seen = items |> Seq.scan (fun (acc: int Set) elem -> acc.Add elem) Set.empty
 
     Seq.zip items seen
-    |> Seq.find (fun (value, seen) -> seen.Contains value)
+    |> Seq.find (fun (elem, seen) -> seen.Contains elem)
     |> fst
