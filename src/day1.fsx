@@ -10,8 +10,7 @@ let Part1 (input: seq<int>) = Seq.sum input
 let repeatSeq items = seq { while true do yield! items }
 
 let Part2 (input: seq<int>) =
-    let input = repeatSeq input
-    let items = Seq.scan (fun acc elem -> acc + elem) 0 input
+    let items = repeatSeq input |> Seq.scan (fun acc elem -> acc + elem) 0
     let seen = items |> Seq.scan (fun (acc: int Set) elem -> acc.Add elem) Set.empty
 
     Seq.zip items seen
