@@ -1,13 +1,8 @@
 module Day2
 
-let input =
-    "inputs/day2.txt"
-    |> System.IO.File.ReadAllLines
-    |> seq
+let input = "inputs/day2.txt" |> System.IO.File.ReadAllLines |> seq
 
-let getCharacterCounts id =
-    id
-    |> Seq.countBy (fun x -> x)
+let getCharacterCounts id = id |> Seq.countBy (fun x -> x)
 
 
 let validId (id: string) (times: int) =
@@ -25,9 +20,8 @@ let Part1 input =
 
     numValid2 * numValid3
 
-let idDifference left right =
-    Seq.zip left right
-    |> Seq.filter (fun (left, right) -> left <> right)
+let getDifference left right =
+    Seq.zip left right |> Seq.filter (fun (left, right) -> left <> right)
 
 let filterDifference left right =
     Seq.zip left right
@@ -37,6 +31,6 @@ let filterDifference left right =
 let Part2 input =
     input
     |> Seq.allPairs input
-    |> Seq.find (fun (l, r) -> (idDifference l r |> Seq.length) = 1)
+    |> Seq.find (fun (l, r) -> (getDifference l r |> Seq.length) = 1)
     |> fun (l, r) -> filterDifference l r
     |> System.String.Concat
