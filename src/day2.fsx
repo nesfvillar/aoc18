@@ -24,3 +24,19 @@ let Part1 input =
     let numValid3 = input |> Seq.filter valid3 |> Seq.length
 
     numValid2 * numValid3
+
+let idDifference left right =
+    Seq.zip left right
+    |> Seq.filter (fun (left, right) -> left <> right)
+
+let filterDifference left right =
+    Seq.zip left right
+    |> Seq.where (fun (left, right) -> left = right)
+    |> Seq.map fst
+
+let Part2 input =
+    input
+    |> Seq.allPairs input
+    |> Seq.find (fun (l, r) -> (idDifference l r |> Seq.length) = 1)
+    |> fun (l, r) -> filterDifference l r
+    |> System.String.Concat
